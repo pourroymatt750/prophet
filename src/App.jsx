@@ -7,6 +7,10 @@ import Landing from './pages/Landing/Landing'
 import Profiles from './pages/Profiles/Profiles'
 import ChangePassword from './pages/ChangePassword/ChangePassword'
 import * as authService from './services/authService'
+import UnitOne from './pages/UnitOne/UnitOne'
+import UnitTwo from './pages/UnitTwo/UnitTwo'
+import UnitThree from './pages/UnitThree/UnitThree'
+import UnitFour from './pages/UnitFour/UnitFour'
 
 const App = () => {
   const [user, setUser] = useState(authService.getUser())
@@ -48,6 +52,22 @@ const App = () => {
               <Navigate to="/login" />
             )
           }
+        />
+        <Route
+          path="/unit-one"
+          element={<UnitOne />}
+        />
+        <Route
+          path="/unit-two"
+          element={<UnitTwo />}
+        />
+        <Route
+          path="/unit-three"
+          element={<UnitThree />}
+        />
+        <Route
+          path="/unit-four"
+          element={<UnitFour />}
         />
       </Routes>
     </>
