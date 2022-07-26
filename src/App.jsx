@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 import Signup from './pages/Signup/Signup'
@@ -11,10 +11,20 @@ import UnitOne from './pages/UnitOne/UnitOne'
 import UnitTwo from './pages/UnitTwo/UnitTwo'
 import UnitThree from './pages/UnitThree/UnitThree'
 import UnitFour from './pages/UnitFour/UnitFour'
+import * as questionService from './services/questionService'
+import AddQuestion from './components/AddQuestion/AddQuestion'
 
 const App = () => {
+  const [questions, setQuestions] = useState([])
   const [user, setUser] = useState(authService.getUser())
   const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   const fetchAllQuestions = async () => {
+  //     const questionData = await questionService.getAll()
+  //     setQuestions(questionData)
+  //   }
+  // })
 
   const handleLogout = () => {
     authService.logout()
@@ -24,6 +34,11 @@ const App = () => {
 
   const handleSignupOrLogin = () => {
     setUser(authService.getUser())
+  }
+
+  const handleAddQuestion = async (newQuestionData) => {
+    const newQuestion = await questionService.create(newQuestionData)
+    setQuestions([...questions, newQuestion])
   }
 
   return (
@@ -55,19 +70,27 @@ const App = () => {
         />
         <Route
           path="/unit-one"
-          element={<UnitOne />}
+          element={<UnitOne 
+            handleAddQuestion={handleAddQuestion}
+          />}
         />
         <Route
           path="/unit-two"
-          element={<UnitTwo />}
+          element={<UnitTwo 
+            handleAddQuestion={handleAddQuestion}
+          />}
         />
         <Route
           path="/unit-three"
-          element={<UnitThree />}
+          element={<UnitThree 
+            handleAddQuestion={handleAddQuestion}
+          />}
         />
         <Route
           path="/unit-four"
-          element={<UnitFour />}
+          element={<UnitFour 
+            handleAddQuestion={handleAddQuestion}
+          />}
         />
       </Routes>
     </>

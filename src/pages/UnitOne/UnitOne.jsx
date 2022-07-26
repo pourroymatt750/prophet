@@ -1,10 +1,12 @@
-import QuestionForm from "../../components/QuestionForm/QuestionForm";
+import AddQuestion from "../../components/AddQuestion/AddQuestion"
 
-const UnitOne = () => {
+const UnitOne = (props) => {
   return ( 
     <>
       <h1>Most Common Unit One Questions</h1>
-      <QuestionForm />
+      <AddQuestion 
+        handleAddQuestion={props.handleAddQuestion}
+      />
     </>
   )
 }

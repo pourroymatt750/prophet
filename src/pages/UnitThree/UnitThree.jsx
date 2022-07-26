@@ -1,10 +1,10 @@
-import QuestionForm from "../../components/QuestionForm/QuestionForm"
+import AddQuestion from "../../components/AddQuestion/AddQuestion";
 
 const UnitThree = () => {
   return ( 
     <>
     <h1>Most Common Unit Three Questions</h1>
-    <QuestionForm />
+    <AddQuestion />
   </>
   )
 }
