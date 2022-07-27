@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import styles from './AddQuestion.module.css'
 
 const AddQuestion = (props) => {
   const formElement = useRef()
@@ -24,10 +26,10 @@ const AddQuestion = (props) => {
         <label for="question">Ask your question here:</label>
       </div>
       <div id="question-textarea">
-        <textarea type="text" name="question" value={formData.question} onChange={handleChange} id="question-input" placeholder="Enter question" cols="30" rows="10" required></textarea>
+        <textarea type="text" name="question" value={formData.question} onChange={handleChange} id="question-input" placeholder="Enter question" cols="50" rows="15" required></textarea>
       </div>
       <div id="submit-btn">
-        <button type="submit">Post</button>
+        <button type="submit" class="btn btn-success">Post</button>
       </div>
     </form>
   )

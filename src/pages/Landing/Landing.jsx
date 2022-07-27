@@ -12,10 +12,10 @@ const Landing = ({ user }) => {
         <>
         <h2>Please login or sign up to continue</h2>
           <Link to="/login">
-            <button className='login'>Login</button>
+            <button id='login' className="btn btn-primary">Login</button>
           </Link>
           <Link to="/signup">
-            <button className='signup'>Sign Up</button>
+            <button id='signup' className="btn btn-success">Sign Up</button>
           </Link>
         </>
       }

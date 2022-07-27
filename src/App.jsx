@@ -13,18 +13,21 @@ import UnitThree from './pages/UnitThree/UnitThree'
 import UnitFour from './pages/UnitFour/UnitFour'
 import * as questionService from './services/questionService'
 import AddQuestion from './components/AddQuestion/AddQuestion'
+import QuestionList from './components/QuestionList/QuestionList'
+import EditQuestion from './pages/EditQuestion/EditQuestion'
 
 const App = () => {
   const [questions, setQuestions] = useState([])
   const [user, setUser] = useState(authService.getUser())
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   const fetchAllQuestions = async () => {
-  //     const questionData = await questionService.getAll()
-  //     setQuestions(questionData)
-  //   }
-  // })
+  useEffect(() => {
+    const fetchAllQuestions = async () => {
+      const questionData = await questionService.getAll()
+      setQuestions(questionData)
+    }
+    fetchAllQuestions()
+  }, [])
 
   const handleLogout = () => {
     authService.logout()
@@ -39,6 +42,21 @@ const App = () => {
   const handleAddQuestion = async (newQuestionData) => {
     const newQuestion = await questionService.create(newQuestionData)
     setQuestions([...questions, newQuestion])
+  }
+
+  const handleDeleteQuestion = async id => {
+    const deletedQuestion = await questionService.deleteOne(id)
+    setQuestions(questions.filter(question => 
+      question._id !== deletedQuestion._id 
+    ))
+  }
+
+  const handleUpdateQuestion = async (updatedQuestionData) => {
+    const updatedQuestion = await questionService.update(updatedQuestionData)
+    const newQuestionsArray = questions.map(question => 
+      question._id === updatedQuestion._id ? updatedQuestion : question
+    )
+    setQuestions(newQuestionsArray)
   }
 
   return (
@@ -72,6 +90,16 @@ const App = () => {
           path="/unit-one"
           element={<UnitOne 
             handleAddQuestion={handleAddQuestion}
+            questions={questions}
+            handleDeleteQuestion={handleDeleteQuestion}
+            user={user}
+            handleUpdateQuestion={handleUpdateQuestion}
+          />}
+        />
+        <Route 
+          path="/unit-one/edit"
+          element={<EditQuestion 
+            handleUpdateQuestion={handleUpdateQuestion}
           />}
         />
         <Route
